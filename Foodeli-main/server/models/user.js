@@ -5,17 +5,17 @@ const UserSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      unique: false,
     },
     email: {
       type: String,
       required: true,
-      unique: true,
+      unique: true, // Giữ unique cho email
+      match: /.+\@.+\..+/ // Regex để kiểm tra định dạng email
     },
     password: {
       type: String,
       required: true,
-      unique: true,
+      // Không cần unique: true
     },
     img: {
       type: String,
@@ -26,9 +26,10 @@ const UserSchema = new mongoose.Schema(
       ref: "Food",
       default: [],
     },
-    Orders: {
+    orders: { // Đổi tên từ Orders sang orders để tuân thủ quy tắc camelCase
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Orders"
+      ref: "Orders",
+      default: [],
     },
     cart: {
       type: [
@@ -44,7 +45,8 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
   },
-  { timestamps: true }
+  { timestamps: true } // Tự động thêm createdAt và updatedAt
 );
 
+// Xuất model User
 export default mongoose.model("User", UserSchema);

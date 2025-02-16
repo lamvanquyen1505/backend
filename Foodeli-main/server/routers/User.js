@@ -16,6 +16,7 @@ import { verifyToken } from "../middleware/verifyUser.js";
 
 const router = express.Router();
 
+// Định nghĩa các route
 router.post("/signup", UserRegister);
 router.post("/signin", UserLogin);
 
