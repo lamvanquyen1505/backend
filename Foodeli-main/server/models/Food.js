@@ -16,7 +16,7 @@ const FoodSchema = new mongoose.Schema(
     },
     desc: {
       type: String,
-      required: true,
+      required: false, // Đặt required thành false để không bắt buộc
       unique: true,
       trim: true, // Loại bỏ khoảng trắng ở đầu và cuối
     },
@@ -34,7 +34,8 @@ const FoodSchema = new mongoose.Schema(
     },
     ingredients: {
       type: [String],
-      required: true,
+      required: false, // Đặt required thành false để không bắt buộc
+      default: [], // Cung cấp giá trị mặc định là mảng rỗng
     },
   },
   { timestamps: true }

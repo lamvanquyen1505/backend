@@ -4,9 +4,15 @@ import * as dotenv from "dotenv";
 import { connectDB } from "./db/mongo.js";
 import UserRouter from "./routers/User.js";
 import FoodRouter from "./routers/Food.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
+
+// Lấy đường dẫn thư mục hiện tại
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Cấu hình CORS
 const corsOptions = {
@@ -21,9 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Route chính
 app.get("/", async (req, res) => {
-  res.status(200).json({
-    message: "Hello, welcome to Foodeli API!",
-  });
+  res.status(200).sendFile(path.join(__dirname, 'index.html')); // Phục vụ file HTML
 });
 
 // Sử dụng các router
